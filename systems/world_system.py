@@ -44,9 +44,9 @@ def mostrar_local_atual(game_state):
     print("\n====================")
     print(f"Posição: {x}, {y}")
     if tile["tipo"] == "cidade":
-        print(f"Cidade de {tile["cidade"]}")
+        print(f"Cidade de {tile['cidade']}")
     else: 
-        print(f"Região: {tile["tipo"]}")
+        print(f"Região: {tile['tipo']}")
     print("====================")
 
     dungeon_id = obter_dungeon_atual(game_state)
