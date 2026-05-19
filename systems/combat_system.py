@@ -1,4 +1,11 @@
 from systems.quest_system import atualizar_progresso
+import random
+
+def verificar_combate():
+    chance = random.randint(1, 100)
+    if chance <= 30:
+        return True
+    return False
 
 def iniciar_combate(player, enemy):
     print(f"\nUm {enemy.nome} apareceu!")
