@@ -2,7 +2,10 @@ CLASSES = {
     "guerreiro": {
         "nome": "Guerreiro",
         "hp": 100,
-        "recurso": 100,
+        "recurso": {
+            "nome": "Energia",
+            "quantidade": 100
+        },
         "forca": 2,
         "defesa": 5
     },
@@ -10,7 +13,10 @@ CLASSES = {
     "mago": {
         "nome": "Mago",
         "hp": 80,
-        "recurso": 200,
+        "recurso": {
+            "nome": "Mana",
+            "quantidade": 200
+        },
         "forca": 2,
         "defesa": 5
     },
@@ -18,7 +24,10 @@ CLASSES = {
     "ladino": {
         "nome": "Ladino",
         "hp": 50,
-        "recurso": 150,
+        "recurso": {
+            "nome": "Energia",
+            "quantidade": 150
+        },
         "forca": 4,
         "defesa": 2
     }

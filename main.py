@@ -12,16 +12,17 @@ from systems.city_system import obter_cidade_atual, entrar_na_cidade, menu_cidad
 from systems.quest_system import aceitar_quest, mostrar_quests
 from systems.dungeon_system import gerar_dungeons, entrar_na_dungeon, obter_dungeon_atual
 from data.enemies import ENEMIES
+from utils.helpers import estatísticas_player
 
-# 
 
 def iniciar_jogo(game_state):
     while game_state.running:
-        mostrar_local_atual(game_state)
-
         cidade = obter_cidade_atual(game_state)
         dungeon = obter_dungeon_atual(game_state)
 
+        print("Mapa Placeholder")
+        mostrar_local_atual(game_state)
+        estatísticas_player(game_state)
         print("C. Configurações")
         print("I. Inventário")
         if cidade or dungeon:

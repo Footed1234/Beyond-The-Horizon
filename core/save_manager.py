@@ -13,6 +13,7 @@ def salvar_jogo(game_state):
             "hp_max": player.hp_max,
             "recurso": player.recurso,
             "recurso_max": player.recurso_max,
+            "recurso_gasto": player.recurso_gasto,
             "forca": player.forca,
             "defesa": player.defesa,
             "moedas": player.moedas,
@@ -57,6 +58,7 @@ def carregar_jogo():
     player.hp_max = player_data["hp_max"]
     player.recurso = player_data["recurso"]
     player.recurso_max = player_data["recurso_max"]
+    player.recurso_gasto = player_data["recurso_gasto"]
     player.forca = player_data["forca"]
     player.defesa = player_data["defesa"]
     player.moedas = player_data["moedas"]

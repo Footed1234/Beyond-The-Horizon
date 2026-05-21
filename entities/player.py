@@ -2,7 +2,6 @@ from data.classes import CLASSES
 
 class Player:
     def __init__(self, nome, classe):
-
         classe_data = CLASSES[classe]
 
         self.nome = nome
@@ -11,11 +10,14 @@ class Player:
         self.hp_max = classe_data["hp"]
         self.hp = self.hp_max
 
-        self.recurso_max = classe_data["recurso"]
+        self.recurso_nome = classe_data["recurso"]["nome"]
+        self.recurso_max = classe_data["recurso"]["quantidade"]
         self.recurso = self.recurso_max
+        self.recurso_gasto = 10
 
         self.forca = classe_data["forca"]
-        self.defesa = classe_data["defesa"]
+        self.defesa_max = classe_data["defesa"]
+        self.defesa = self.defesa_max
 
         self.nivel = 1
         self.xp = 0
@@ -30,18 +32,24 @@ class Player:
 
         self.quests = {}
 
-    def receber_dano(self, dano):
-        dano_final = max(0, dano - self.defesa) # Calcula o dano final considerando a defesa do jogador
+        self.recuperando = False
+        self.recuperacao_turnos = 0
 
-        self.hp -= dano_final
+    def receber_dano(self, dano):
+        if self.defesa >= dano:
+            self.defesa -= dano
+            dano_hp = 0
+        else:
+            dano_hp = dano - self.defesa
+            self.defesa = 0
+            self.hp -= dano_hp
 
         if self.hp < 0:
             self.hp = 0
 
-        return dano_final
+        return dano_hp
     
     def curar(self, valor):
-
         self.hp += valor
 
         if self.hp > self.hp_max:
@@ -65,8 +73,32 @@ class Player:
         self.recurso_max += 5
         self.recurso += 5
         self.forca += 1
+        self.defesa_max += 1
         self.defesa += 1
     
     def esta_vivo(self):
         return self.hp > 0
-        
+    
+    def iniciar_recuperacao(self):
+        self.recuperando = True
+        self.recuperacao_turnos = 5
+
+    def esta_em_recuperacao(self):
+        return self.recuperando
+
+    def processar_recuperacao(self):
+        if not self.recuperando:
+            return False
+
+        self.recuperacao_turnos -= 1
+        if self.recuperacao_turnos <= 0:
+            self.recuperando = False
+            self.recuperacao_turnos = 0
+            self.recurso = self.recurso_max
+            return True
+
+        return False
+
+    def recuperar_da_batalha(self):
+        self.recurso = self.recurso_max
+        self.defesa = self.defesa_max

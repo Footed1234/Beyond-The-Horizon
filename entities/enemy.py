@@ -8,8 +8,7 @@ class Enemy:
 
         self.nome = enemy_data["nome"]
 
-        self.hp_max = enemy_data["hp"]
-        self.hp = self.hp_max
+        self.hp = enemy_data["hp"]
         
         self.forca = enemy_data["forca"]
         self.defesa = enemy_data["defesa"]
@@ -18,14 +17,18 @@ class Enemy:
         self.moedas = enemy_data["moedas"]
 
     def receber_dano(self, dano):
-        dano_final = max(0, dano - self.defesa)
+        if self.defesa >= dano:
+            self.defesa -= dano
+            dano_hp = 0
+        else:
+            dano_hp = dano - self.defesa
+            self.defesa = 0
+            self.hp -= dano_hp
 
-        self.hp -= dano_final
-
-        if self.hp < 0: 
+        if self.hp < 0:
             self.hp = 0
 
-        return dano_final
+        return dano_hp
     
     def esta_vivo(self):
         return self.hp > 0 
